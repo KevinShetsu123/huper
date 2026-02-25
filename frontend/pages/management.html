@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyper Data Lab - Data Management</title>
+    <link rel="stylesheet" href="/frontend/static/css/main.css" />
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="nav-brand">Hyper Data Lab</div>
+        <div class="nav-links">
+            <a href="/frontend/pages/detail.html" class="nav-link">Data Collection</a>
+            <a href="/frontend/pages/management.html" class="nav-link active">Data Management</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Data Management</h1>
+            <p>View and manage financial reports</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Filters</h2>
+            </div>
+            <div class="card-body">
+                <!-- First Filter Row -->
+                <div class="filter-row">
+                    <div class="form-group">
+                        <label for="filterSymbol">Symbol</label>
+                        <input type="text" id="filterSymbol" placeholder="Filter by symbol" class="input-field" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterAssurance">Assurance Type</label>
+                        <select id="filterAssurance" class="input-field">
+                            <option value="">All</option>
+                            <option value="audited">Audited Only</option>
+                            <option value="reviewed">Reviewed Only</option>
+                            <option value="both">
+                                Audited and Reviewed
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterType">Report Type</label>
+                        <select id="filterType" class="input-field">
+                            <option value="">All Types</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="annual">Annual</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Second Filter Row -->
+                <div class="filter-row">
+                    <div class="form-group">
+                        <label for="filterYear">Year</label>
+                        <input type="number" id="filterYear" placeholder="Filter by year" class="input-field" min="2000"
+                            max="2100" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterQuarter">Quarter</label>
+                        <input type="text" id="filterQuarter" placeholder="1, 2, 3, or 4" class="input-field"
+                            maxlength="1" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filterLimit">Limit</label>
+                        <select id="filterLimit" class="input-field">
+                            <option value="50">50</option>
+                            <option value="100" selected>100</option>
+                            <option value="200">200</option>
+                            <option value="500">500</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="button-group" style="justify-content: flex-end">
+                    <button id="applyFiltersBtn" class="btn btn-green">
+                        <span class="btn-icon">🔍</span> Apply Filters
+                    </button>
+                    <button id="clearFiltersBtn" class="btn btn-yellow">
+                        <span class="btn-icon">⟳</span> Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <div class="stat-label">Total Reports</div>
+                    <div id="totalReports" class="stat-number">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-label">Quarterly Reports</div>
+                    <div id="quarterlyReports" class="stat-number">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div class="stat-content">
+                    <div class="stat-label">Annual Reports</div>
+                    <div id="annualReports" class="stat-number">0</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✓</div>
+                <div class="stat-content">
+                    <div class="stat-label">Audited Reports</div>
+                    <div id="auditedReports" class="stat-number">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Financial Reports</h2>
+                <div class="table-info">
+                    <span>Showing
+                        <span id="showingCount">0</span> reports</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Company</th>
+                                <th>Report Name</th>
+                                <th>Type</th>
+                                <th>Year</th>
+                                <th>Quarter</th>
+                                <th>Audited</th>
+                                <th>Reviewed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div class="loading">
+                                        Loading data...
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Delete</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this report?</p>
+                <p class="modal-detail" id="deleteDetail"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDeleteBtn" class="btn btn-red">
+                    Delete
+                </button>
+                <button id="cancelDeleteBtn" class="btn btn-yellow">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/static/js/api.js"></script>
+    <script src="/frontend/static/js/management.js"></script>
+</body>
+
+</html>

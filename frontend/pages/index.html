@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyper Data Lab - Data Collection</title>
+    <link rel="stylesheet" href="/frontend/static/css/main.css" />
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="nav-brand">Hyper Data Lab</div>
+        <div class="nav-links">
+            <a href="/frontend/pages/index.html" class="nav-link active">Data Collection</a>
+            <a href="/frontend/pages/management.html" class="nav-link">Data Management</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Data Collection</h1>
+        </div>
+
+        <!-- Financial Report Collector Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Financial Report Collector</h2>
+                <button id="settingsBtn" class="btn-icon-action btn-settings" title="Settings">
+                    <span>⚙</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="symbolsContainer" class="symbols-container">
+                    <!-- Symbol inputs will be dynamically added here -->
+                    <div class="symbol-row" data-index="0">
+                        <input type="text" class="input-field symbol-input" placeholder="Enter symbol (e.g., FPT)" />
+                        <select class="input-field source-select">
+                            <option value="cafef">CafeF</option>
+                            <option value="vietstock" disabled>
+                                VietStockFinance (Coming Soon)
+                            </option>
+                        </select>
+                        <button class="btn-icon-action btn-remove" title="Remove" onclick="removeSymbolRow(0)" disabled>
+                            <span>✕</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <button id="addSymbolBtn" class="btn-icon-action btn-add" title="Add Symbol">
+                        <span>+</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="button-group-scrape">
+                    <button id="startScrapeBtn" class="btn-scrape btn-green">
+                        <span class="btn-icon">▶</span> Start
+                    </button>
+                    <button id="stopScrapeBtn" class="btn-scrape btn-red" disabled>
+                        <span class="btn-icon">⏹</span> Stop
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Log Section -->
+        <div class="card log-card">
+            <div class="card-header">
+                <h2>System Console</h2>
+                <div class="log-stats">
+                    <span class="stat-item">
+                        <span class="stat-label">Total:</span>
+                        <span id="logTotal" class="stat-value">0</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">Success:</span>
+                        <span id="logSuccess" class="stat-value success">0</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">Errors:</span>
+                        <span id="logErrors" class="stat-value error">0</span>
+                    </span>
+                </div>
+                <button id="clearLogsBtn" class="btn-icon-action btn-clear-log" title="Clear logs">
+                    <span>🗑</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="consoleLog" class="console-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Scraper Settings</h3>
+                <span class="modal-close" id="settingsModalClose">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="headlessMode" checked />
+                        <span>Headless Mode (Faster)</span>
+                    </label>
+                    <p class="setting-description">
+                        Run browser in background without UI for faster
+                        scraping
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettingsBtn" class="btn btn-green">
+                    Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/static/js/api.js"></script>
+    <script src="/frontend/static/js/collection.js"></script>
+</body>
+
+</html>

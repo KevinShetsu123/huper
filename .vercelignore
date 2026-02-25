@@ -1,0 +1,38 @@
+# Ignore Python backend (not deployed to Vercel)
+backend/
+__pycache__/
+*.py
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist/
+build/
+venv/
+env/
+
+# Ignore Python configuration files
+requirements.txt
+alembic.ini
+__init__.py
+
+# Ignore test files
+test/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore Git
+.git/
+.gitignore
+
+# Ignore VS Code
+.vscode/
+
+# Keep only frontend and api
+!api/
+!frontend/

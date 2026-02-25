@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyper Data Lab - Report Detail</title>
+    <link rel="stylesheet" href="/frontend/static/css/main.css" />
+</head>
+
+<body>
+    <nav class="top-nav">
+        <div class="nav-brand">Hyper Data Lab</div>
+        <div class="nav-links">
+            <a href="/frontend/pages/detail.html" class="nav-link">Data Collection</a>
+            <a href="/frontend/pages/management.html" class="nav-link">Data Management</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <button onclick="history.back()" class="btn-back">
+                <span>←</span> Back
+            </button>
+            <h1 id="pageTitle">Loading...</h1>
+        </div>
+
+        <!-- Report Info Section -->
+        <div class="card">
+            <div class="card-header">
+                <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        ">
+                    <h2>Report Information</h2>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="info-container">
+                    <!-- First Row -->
+                    <div class="info-row info-row-top">
+                        <div class="info-item">
+                            <label>Symbol:</label>
+                            <span id="infoSymbol" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Company:</label>
+                            <span id="infoCompany" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Report Name:</label>
+                            <span id="infoReportName" class="info-value">-</span>
+                        </div>
+                    </div>
+                    <!-- Second Row -->
+                    <div class="info-row info-row-bottom">
+                        <div class="info-item">
+                            <label>Type:</label>
+                            <span id="infoType" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Period:</label>
+                            <span id="infoPeriod" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Audited:</label>
+                            <span id="infoAudited" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Reviewed:</label>
+                            <span id="infoReviewed" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Tabs -->
+        <div class="card">
+            <div class="card-header">
+                <div class="financial-tabs">
+                    <button class="financial-tab active" data-tab="balance-sheet">
+                        Balance Sheet
+                    </button>
+                    <button class="financial-tab" data-tab="income-statement">
+                        Income Statement
+                    </button>
+                    <button class="financial-tab" data-tab="cash-flow">
+                        Cash Flow Statement
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="financial-tab-content">
+                    <div id="balance-sheet-content" class="tab-pane active">
+                        <div class="loading">
+                            Loading balance sheet data...
+                        </div>
+                    </div>
+                    <div id="income-statement-content" class="tab-pane">
+                        <div class="loading">
+                            Loading income statement data...
+                        </div>
+                    </div>
+                    <div id="cash-flow-content" class="tab-pane">
+                        <div class="loading">Loading cash flow data...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/static/js/api.js"></script>
+    <script src="/frontend/static/js/detail.js"></script>
+</body>
+
+</html>
