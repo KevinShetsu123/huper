@@ -1,49 +1,14 @@
 {
-    "functions": {
-        "api/v1.js": {
-            "memory": 1024,
-            "maxDuration": 10
-        }
-    },
-    "rewrites": [
-        {
-            "source": "/api/v1/:path*",
-            "destination": "/api/v1"
-        },
-        {
-            "source": "/",
-            "destination": "/frontend/pages/index.html"
-        },
-        {
-            "source": "/detail",
-            "destination": "/frontend/pages/detail.html"
-        },
-        {
-            "source": "/management",
-            "destination": "/frontend/pages/management.html"
-        },
-        {
-            "source": "/static/:path*",
-            "destination": "/frontend/static/:path*"
-        }
-    ],
-    "headers": [
-        {
-            "source": "/api/v1/:path*",
-            "headers": [
-                {
-                    "key": "Access-Control-Allow-Origin",
-                    "value": "*"
-                },
-                {
-                    "key": "Access-Control-Allow-Methods",
-                    "value": "GET, POST, PUT, DELETE, OPTIONS"
-                },
-                {
-                    "key": "Access-Control-Allow-Headers",
-                    "value": "Content-Type, Authorization"
-                }
-            ]
-        }
-    ]
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ]
 }
